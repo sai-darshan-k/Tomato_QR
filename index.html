@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green House Bag Tomato</title>
+    <title>Green House Cherry Tomato - Information</title>
     <style>
         * {
             margin: 0;
@@ -32,17 +32,65 @@
             letter-spacing: 0.5px;
         }
 
-        .hero-image {
+        .slider-container {
             width: 100%;
             height: 350px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350"><rect fill="%23e8f5e9" width="400" height="350"/><circle cx="200" cy="175" r="80" fill="%23c62828" opacity="0.8"/><circle cx="160" cy="160" r="60" fill="%23d32f2f" opacity="0.7"/><circle cx="240" cy="190" r="65" fill="%23c62828" opacity="0.75"/><ellipse cx="200" cy="100" rx="40" ry="25" fill="%232e7d32" opacity="0.8"/><path d="M200 100 Q210 80 220 85" stroke="%231b5e20" stroke-width="3" fill="none"/></svg>');
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            overflow: hidden;
+            background: #e8f5e9;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-size: cover;
+            background-position: center;
             position: relative;
+        }
+
+        .slide-placeholder {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            width: 30px;
+            border-radius: 5px;
         }
 
         .badge {
@@ -56,6 +104,7 @@
             font-size: 12px;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 10;
         }
 
         .container {
@@ -85,6 +134,16 @@
             color: #666;
             font-size: 16px;
             margin-bottom: 20px;
+        }
+
+        .info-badge {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1565c0;
         }
 
         .specs-grid {
@@ -182,7 +241,7 @@
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            background: linear-gradient(135deg, #5e92f3 0%, #4a7edb 100%);
             color: white;
             border: none;
             padding: 18px 40px;
@@ -191,14 +250,14 @@
             font-weight: 600;
             width: calc(100% - 40px);
             margin: 20px 20px 40px;
-            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+            box-shadow: 0 8px 25px rgba(74, 126, 219, 0.4);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .cta-button:active {
             transform: scale(0.98);
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            box-shadow: 0 4px 15px rgba(74, 126, 219, 0.4);
         }
 
         .growing-tips {
@@ -245,124 +304,207 @@
 </head>
 <body>
     <div class="header">
-        <h1>🍅 Premium Greenhouse Produce</h1>
+        <h1>🍅 Greenhouse Cherry Tomato Info</h1>
     </div>
 
-    <div class="hero-image">
-        <div class="badge">FRESH PICKED</div>
+    <div class="slider-container">
+        <div class="badge">EDUCATIONAL</div>
+        <div class="slider" id="slider">
+            <div class="slide">
+                <div class="slide-placeholder">
+                    📸 Slide 1<br>
+                    <small style="color: #999; font-size: 14px;">Add your image here</small>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-placeholder">
+                    📸 Slide 2<br>
+                    <small style="color: #999; font-size: 14px;">Add your image here</small>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-placeholder">
+                    📸 Slide 3<br>
+                    <small style="color: #999; font-size: 14px;">Add your image here</small>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
     </div>
 
     <div class="container">
         <div class="product-info">
-            <h2 class="product-title">Green House Bag Tomato</h2>
-            <p class="product-subtitle">Premium vine-ripened tomatoes grown in controlled greenhouse environment</p>
+            <h2 class="product-title">Cherry Tomato</h2>
+            <p class="product-subtitle">Small, sweet tomatoes grown in controlled greenhouse environment</p>
+            
+            <div class="info-badge">
+                ℹ️ This page provides educational information about greenhouse cherry tomatoes for students and learners.
+            </div>
 
             <div class="specs-grid">
                 <div class="spec-card">
-                    <div class="spec-icon">📦</div>
-                    <div class="spec-label">Package</div>
-                    <div class="spec-value">500g Bag</div>
+                    <div class="spec-icon">📏</div>
+                    <div class="spec-label">Size</div>
+                    <div class="spec-value">2-3 cm</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">⚖️</div>
+                    <div class="spec-label">Weight</div>
+                    <div class="spec-value">15-30g</div>
                 </div>
                 <div class="spec-card">
                     <div class="spec-icon">🌡️</div>
-                    <div class="spec-label">Storage</div>
-                    <div class="spec-value">15-20°C</div>
+                    <div class="spec-label">Growing Temp</div>
+                    <div class="spec-value">18-25°C</div>
                 </div>
                 <div class="spec-card">
                     <div class="spec-icon">⏱️</div>
-                    <div class="spec-label">Shelf Life</div>
-                    <div class="spec-value">7-10 Days</div>
-                </div>
-                <div class="spec-card">
-                    <div class="spec-icon">🌱</div>
-                    <div class="spec-label">Growing</div>
-                    <div class="spec-value">Organic</div>
+                    <div class="spec-label">Harvest Time</div>
+                    <div class="spec-value">60-80 Days</div>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h3 class="section-title">Key Features</h3>
+            <h3 class="section-title">Characteristics</h3>
             <ul class="features-list">
                 <li>
                     <div class="feature-icon">✓</div>
-                    <span>Grown in controlled greenhouse environment for optimal quality</span>
+                    <span>Small, round shape with vibrant red color when ripe</span>
                 </li>
                 <li>
                     <div class="feature-icon">✓</div>
-                    <span>Vine-ripened for maximum flavor and sweetness</span>
+                    <span>Sweet flavor with higher sugar content than regular tomatoes</span>
                 </li>
                 <li>
                     <div class="feature-icon">✓</div>
-                    <span>Rich in vitamins A, C, and lycopene antioxidants</span>
+                    <span>Thin skin and juicy texture ideal for fresh consumption</span>
                 </li>
                 <li>
                     <div class="feature-icon">✓</div>
-                    <span>Perfect for salads, cooking, and fresh consumption</span>
+                    <span>Grown in clusters on vine, typically 10-20 tomatoes per cluster</span>
                 </li>
                 <li>
                     <div class="feature-icon">✓</div>
-                    <span>Sustainably grown with minimal pesticide use</span>
+                    <span>Thrives in controlled greenhouse with optimal light and humidity</span>
                 </li>
             </ul>
         </div>
 
         <div class="section">
-            <h3 class="section-title">Nutritional Value</h3>
+            <h3 class="section-title">Nutritional Information</h3>
             <p style="color: #666; margin-bottom: 15px;">Per 100g serving</p>
             <div class="nutritional-info">
                 <div class="nutrient">
-                    <div class="nutrient-value">18</div>
+                    <div class="nutrient-value">27</div>
                     <div class="nutrient-label">Calories</div>
                 </div>
                 <div class="nutrient">
-                    <div class="nutrient-value">0.9g</div>
+                    <div class="nutrient-value">1.3g</div>
                     <div class="nutrient-label">Protein</div>
                 </div>
                 <div class="nutrient">
-                    <div class="nutrient-value">3.9g</div>
+                    <div class="nutrient-value">5.8g</div>
                     <div class="nutrient-label">Carbs</div>
                 </div>
                 <div class="nutrient">
-                    <div class="nutrient-value">14mg</div>
+                    <div class="nutrient-value">20mg</div>
                     <div class="nutrient-label">Vitamin C</div>
                 </div>
                 <div class="nutrient">
-                    <div class="nutrient-value">237mg</div>
+                    <div class="nutrient-value">290mg</div>
                     <div class="nutrient-label">Potassium</div>
                 </div>
                 <div class="nutrient">
-                    <div class="nutrient-value">2.6mg</div>
+                    <div class="nutrient-value">3.0mg</div>
                     <div class="nutrient-label">Lycopene</div>
                 </div>
             </div>
         </div>
 
-        <div class="section growing-tips">
-            <h3 class="section-title">Storage Tips</h3>
+        <div class="section">
+            <h3 class="section-title">Health Benefits</h3>
             <ul class="features-list">
                 <li>
-                    <div class="feature-icon">🌡️</div>
-                    <span>Store at room temperature away from direct sunlight</span>
+                    <div class="feature-icon">❤️</div>
+                    <span>Rich in lycopene antioxidant that supports heart health</span>
                 </li>
                 <li>
-                    <div class="feature-icon">❄️</div>
-                    <span>Avoid refrigeration to maintain optimal flavor</span>
+                    <div class="feature-icon">💪</div>
+                    <span>High vitamin C content boosts immune system</span>
                 </li>
                 <li>
-                    <div class="feature-icon">🍃</div>
-                    <span>Keep stem side down for longer freshness</span>
+                    <div class="feature-icon">👁️</div>
+                    <span>Contains beta-carotene beneficial for eye health</span>
                 </li>
                 <li>
-                    <div class="feature-icon">⏰</div>
-                    <span>Use within 7-10 days for best quality</span>
+                    <div class="feature-icon">🦴</div>
+                    <span>Good source of vitamin K and potassium for bone health</span>
                 </li>
             </ul>
         </div>
 
-        <button class="cta-button" onclick="alert('Thank you for your interest! Contact us to place an order.')">
-            Order Now
+        <div class="section growing-tips">
+            <h3 class="section-title">Growing Conditions</h3>
+            <ul class="features-list">
+                <li>
+                    <div class="feature-icon">☀️</div>
+                    <span>Requires 6-8 hours of sunlight or grow lights daily</span>
+                </li>
+                <li>
+                    <div class="feature-icon">💧</div>
+                    <span>Needs consistent watering, soil should be moist but not soggy</span>
+                </li>
+                <li>
+                    <div class="feature-icon">🌡️</div>
+                    <span>Optimal temperature range: 18-25°C during day, 13-16°C at night</span>
+                </li>
+                <li>
+                    <div class="feature-icon">🌱</div>
+                    <span>pH level: 6.0-6.8 for optimal nutrient absorption</span>
+                </li>
+                <li>
+                    <div class="feature-icon">🌿</div>
+                    <span>Regular pruning and support structures help maximize yield</span>
+                </li>
+            </ul>
+        </div>
+
+        <button class="cta-button" onclick="showComingSoon()">
+            📊 Get Real Time Data
         </button>
     </div>
+
+    <script>
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = 3;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // Auto-slide every 4 seconds
+        setInterval(autoSlide, 4000);
+
+        function showComingSoon() {
+            alert('🚀 This feature will be available soon!\n\nReal-time data monitoring including:\n• Temperature & Humidity\n• Growth Progress\n• Nutrient Levels\n• Harvest Predictions');
+        }
+    </script>
 </body>
 </html>
