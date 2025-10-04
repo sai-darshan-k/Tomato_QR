@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green House Cherry Tomato - Information</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,7 +14,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #f8f9fa;
             color: #333;
             line-height: 1.6;
@@ -108,7 +110,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0;
         }
@@ -132,23 +134,14 @@
 
         .product-subtitle {
             color: #666;
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 20px;
-        }
-
-        .info-badge {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #1565c0;
+            line-height: 1.7;
         }
 
         .specs-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin: 25px 0;
         }
@@ -297,18 +290,53 @@
             }
             
             .specs-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            .cta-button {
+                width: calc(100% - 30px);
+                margin: 20px 15px 40px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .slider-container {
+                height: 450px;
+            }
+
+            .product-info {
+                margin: -50px 40px 30px;
+                padding: 35px;
+            }
+
+            .section {
+                margin: 30px 40px;
+                padding: 30px;
+            }
+
+            .specs-grid {
+                gap: 20px;
+            }
+
+            .cta-button {
+                width: calc(100% - 80px);
+                margin: 30px 40px 50px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🍅 Greenhouse Cherry Tomato Info</h1>
+        <h1>🍅 Greenhouse Cherry Tomato</h1>
     </div>
 
     <div class="slider-container">
-        <div class="badge">EDUCATIONAL</div>
+        <div class="badge">FRESH</div>
         <div class="slider" id="slider">
             <div class="slide">
                 <div class="slide-placeholder">
@@ -339,11 +367,7 @@
     <div class="container">
         <div class="product-info">
             <h2 class="product-title">Cherry Tomato</h2>
-            <p class="product-subtitle">Small, sweet tomatoes grown in controlled greenhouse environment</p>
-            
-            <div class="info-badge">
-                ℹ️ This page provides educational information about greenhouse cherry tomatoes for students and learners.
-            </div>
+            <p class="product-subtitle">Nature's candy in bite-sized perfection. These vibrant red gems are grown in our state-of-the-art greenhouse, ensuring optimal sweetness and nutrition year-round. Bursting with flavor and packed with antioxidants, they're perfect for snacking, salads, or adding a pop of color to any dish.</p>
 
             <div class="specs-grid">
                 <div class="spec-card">
