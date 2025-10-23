@@ -36,28 +36,35 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            position: relative;
         }
 
-        /* UPDATED Watermark - STRAIGHT & CLEAN */
-        .watermark {
+        /* Floating Elements */
+        .floating-elements {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg); /* STRAIGHT - NO ROTATION */
-            z-index: 1;
-            opacity: 0.04;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        .watermark img {
-            width: 600px;
-            height: auto;
-            filter: grayscale(100%) brightness(1.2);
+        .float-item {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 20s infinite linear;
         }
 
-        .watermark-text {
-            display: none; /* REMOVED - Clean watermark only logo */
+        .float-item:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .float-item:nth-child(2) { top: 60%; right: 15%; animation-delay: -5s; }
+        .float-item:nth-child(3) { top: 80%; left: 20%; animation-delay: -10s; }
+        .float-item:nth-child(4) { bottom: 20%; right: 10%; animation-delay: -15s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
         }
 
         /* Header */
@@ -69,8 +76,6 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            z-index: 10;
-            margin-bottom: 20px;
         }
 
         .header::before {
@@ -235,7 +240,6 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             backdrop-filter: blur(20px);
-            z-index: 10;
         }
 
         .product-card::before {
@@ -345,7 +349,6 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
-            z-index: 10;
         }
 
         .content-section:hover {
@@ -488,7 +491,6 @@
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            z-index: 10;
         }
 
         .cta-button::before {
@@ -524,7 +526,6 @@
             border-radius: var(--border-radius) var(--border-radius) 0 0;
             box-shadow: 0 -20px 60px rgba(0,0,0,0.05);
             margin: 0 16px 16px;
-            z-index: 10;
         }
 
         .footer-author {
@@ -532,7 +533,7 @@
             font-weight: 800;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: perfectly transparent;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
             margin: 8px 0 4px;
             letter-spacing: -0.3px;
@@ -547,12 +548,35 @@
             line-height: 1.5;
         }
 
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            z-index: 1;
+            opacity: 0.06;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .watermark img {
+            width: 180px;
+            height: auto;
+            filter: grayscale(100%) brightness(1.2);
+            margin-bottom: 12px;
+        }
+
+        .watermark-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--leaf-green);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
         /* Mobile Optimizations */
         @media (max-width: 480px) {
-            .watermark img {
-                width: 200px;
-            }
-            
             .hero-section {
                 height: 280px;
             }
@@ -614,10 +638,6 @@
                 grid-template-columns: repeat(4, 1fr);
                 gap: 20px;
             }
-            
-            .watermark img {
-                width: 600px;
-            }
         }
 
         /* Smooth Scroll */
@@ -645,9 +665,18 @@
     </style>
 </head>
 <body>
-    <!-- UPDATED Watermark - STRAIGHT & CLEAN -->
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="float-item">🍅</div>
+        <div class="float-item">🍒</div>
+        <div class="float-item">🌿</div>
+        <div class="float-item">🍅</div>
+    </div>
+
+    <!-- Watermark -->
     <div class="watermark">
         <img src="christ_logo1.jpg" alt="Christ Logo">
+        <span class="watermark-text">Premium Organic</span>
     </div>
 
     <!-- Header -->
@@ -693,8 +722,8 @@
         </div>
     </section>
 
+    <!-- Product Info Card -->
     <div class="container">
-        <!-- Product Info Card -->
         <article class="product-card fade-in">
             <h2 class="product-title">Sweet Cherry Tomato</h2>
             <p class="product-subtitle">Experience the perfect balance of sweetness and juiciness in every bite. Grown in our state-of-the-art greenhouse with precision climate control, these cherry tomatoes deliver unmatched flavor and nutrition throughout the year. Perfect for snacking, salads, or gourmet dishes.</p>
