@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green House Cherry Tomato - Information</title>
+    <title>Green House Cherry Tomato - Premium Organic</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
@@ -13,210 +14,377 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            position: relative;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --tomato-red: #ff4f4f;
+            --leaf-green: #2d5016;
+            --light-green: #a8e6cf;
+            --bg-light: #fdfdfd;
+            --card-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            --card-shadow-hover: 0 30px 80px rgba(0,0,0,0.12);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
         }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-light);
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .float-item {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 20s infinite linear;
+        }
+
+        .float-item:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .float-item:nth-child(2) { top: 60%; right: 15%; animation-delay: -5s; }
+        .float-item:nth-child(3) { top: 80%; left: 20%; animation-delay: -10s; }
+        .float-item:nth-child(4) { bottom: 20%; right: 10%; animation-delay: -15s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        /* Header */
         .header {
-            background: linear-gradient(135deg, #ff4f4f 0%, #639976 100%);
-            padding: 20px;
+            background: var(--primary-gradient);
+            padding: 15px 20px;
             text-align: center;
             color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.8" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-tagline {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.9;
             letter-spacing: 0.5px;
         }
 
-        .watermark {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
-            opacity: 0.04;
-            pointer-events: none;
-        }
-
-        .watermark img {
-            width: 600px;
-            height: auto;
+        /* Hero Slider */
+        .hero-section {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+            margin-bottom: -20px;
+            z-index: 10;
         }
 
         .slider-container {
-            width: 100%;
-            height: 350px;
+            height: 100%;
             position: relative;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            background: #e8f5e9;
+            box-shadow: var(--card-shadow);
         }
 
         .slider {
             display: flex;
             width: 100%;
             height: 100%;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .slide {
             min-width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
             position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
         }
 
-        .slide-placeholder {
-            font-size: 18px;
-            color: #666;
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            margin: 20px;
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
-        .slider-dots {
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 40px 20px 20px;
+            color: white;
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            z-index: 15;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Slider Controls */
+        .slider-controls {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
-            z-index: 10;
+            gap: 12px;
+            z-index: 15;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255,255,255,0.4);
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .dot.active {
             background: white;
-            width: 30px;
-            border-radius: 5px;
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
         }
 
-        .badge {
+        .dot::after {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff6b6b;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
-            z-index: 10;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        .product-info {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
             background: white;
-            margin: -30px 20px 20px;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active::after {
+            width: 6px;
+            height: 6px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            margin: 0 16px 24px;
+            border-radius: var(--border-radius);
+            padding: 32px 24px;
+            box-shadow: var(--card-shadow);
             position: relative;
-            z-index: 10;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(20px);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .product-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #2d5016;
-            margin-bottom: 10px;
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--leaf-green) 0%, var(--tomato-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .product-subtitle {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 20px;
+            color: #64748b;
+            font-size: 16px;
             line-height: 1.7;
+            margin-bottom: 24px;
+            font-weight: 400;
         }
 
-        .specs-grid {
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 25px 0;
+            gap: 16px;
+            margin: 28px 0;
         }
 
-        .spec-card {
-            background: linear-gradient(135deg, #f1f8f4 0%, #e8f5e9 100%);
-            padding: 15px;
-            border-radius: 12px;
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(248,250,252,0.6) 100%);
+            backdrop-filter: blur(20px);
+            padding: 20px 16px;
+            border-radius: var(--border-radius-sm);
             text-align: center;
-            border: 1px solid #c8e6c9;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--success-gradient);
+            transform: scaleX(0);
             transition: transform 0.3s ease;
         }
 
-        .spec-card:active {
-            transform: scale(0.98);
+        .stat-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .spec-icon {
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .stat-icon {
             font-size: 28px;
             margin-bottom: 8px;
+            display: block;
         }
 
-        .spec-label {
-            font-size: 12px;
-            color: #666;
+        .stat-label {
+            font-size: 11px;
+            color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
-        .spec-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2d5016;
-            margin-top: 5px;
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--leaf-green);
+            letter-spacing: -0.3px;
         }
 
-        .section {
+        /* Content Sections */
+        .content-section {
             background: white;
-            margin: 20px;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin: 0 16px 24px;
+            padding: 32px 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
         }
 
         .section-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
-            color: #2d5016;
-            margin-bottom: 15px;
+            color: #1e293b;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            position: relative;
         }
 
-        .section-title::before {
+        .section-title::after {
             content: '';
-            width: 4px;
-            height: 24px;
-            background: linear-gradient(180deg, #4a7c2c 0%, #2d5016 100%);
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gradient);
             border-radius: 2px;
         }
 
@@ -225,334 +393,481 @@
         }
 
         .features-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
             display: flex;
-            align-items: center;
-            gap: 12px;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
         }
 
         .features-list li:last-child {
             border-bottom: none;
         }
 
+        .features-list li:hover {
+            padding-left: 8px;
+            background: linear-gradient(90deg, rgba(78, 205, 196, 0.05) 0%, transparent 100%);
+            border-radius: var(--border-radius-sm);
+            margin: 0 -8px;
+            padding: 20px 8px;
+        }
+
         .feature-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #4a7c2c 0%, #2d5016 100%);
-            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            margin-top: 2px;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, #5e92f3 0%, #4a7edb 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
-            width: calc(100% - 40px);
-            margin: 20px 20px 40px;
-            box-shadow: 0 8px 25px rgba(74, 126, 219, 0.4);
-            cursor: pointer;
+        .feature-text {
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Nutrition Grid */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .nutrient-card {
+            background: linear-gradient(135deg, #fef7ff 0%, #fff5f7 100%);
+            padding: 20px 16px;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            border: 1px solid rgba(236, 72, 153, 0.1);
             transition: all 0.3s ease;
         }
 
-        .cta-button:active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 15px rgba(74, 126, 219, 0.4);
-        }
-
-        .growing-tips {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
-            border-left: 4px solid #ffc107;
-        }
-
-        .nutritional-info {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .nutrient {
-            text-align: center;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 10px;
+        .nutrient-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.1);
         }
 
         .nutrient-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #c62828;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--tomato-red);
+            margin-bottom: 6px;
+            line-height: 1.2;
         }
 
         .nutrient-label {
-            font-size: 11px;
-            color: #666;
-            margin-top: 4px;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .footer .author {
+        /* CTA Button */
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 700;
-            color: #2d5016;
+            width: calc(100% - 32px);
+            margin: 0 16px 32px;
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .footer .tagline {
-            font-size: 12px;
-            color: #666;
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: #64748b;
+            background: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.05);
+            margin: 0 16px 16px;
+        }
+
+        .footer-author {
+            font-size: 20px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 8px 0 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.8;
+            max-width: 280px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            z-index: 1;
+            opacity: 0.06;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .watermark img {
+            width: 180px;
+            height: auto;
+            filter: grayscale(100%) brightness(1.2);
+            margin-bottom: 12px;
         }
 
         .watermark-text {
-            display: block;
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: 500;
-            color: #4a7c2c;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--leaf-green);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        /* Mobile Optimizations */
         @media (max-width: 480px) {
-            .product-title {
-                font-size: 24px;
+            .hero-section {
+                height: 280px;
             }
             
-            .specs-grid {
+            .product-card,
+            .content-section {
+                margin: 0 12px 20px;
+                padding: 24px 20px;
+            }
+            
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
-
-            .section {
-                margin: 15px;
-                padding: 20px;
-            }
-
+            
             .cta-button {
-                width: calc(100% - 30px);
-                margin: 20px 15px 40px;
+                width: calc(100% - 24px);
+                margin: 0 12px 24px;
+                padding: 18px 32px;
+                font-size: 16px;
             }
-
-            .watermark img {
-                width: 200px;
+            
+            .features-list li {
+                padding: 16px 0;
+                gap: 12px;
+            }
+            
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
         }
 
         @media (min-width: 768px) {
-            .slider-container {
-                height: 450px;
+            .hero-section {
+                height: 420px;
+                margin-bottom: -40px;
             }
-
-            .product-info {
-                margin: -50px 40px 30px;
-                padding: 35px;
+            
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
             }
-
-            .section {
-                margin: 30px 40px;
-                padding: 30px;
+            
+            .product-card,
+            .content-section {
+                margin: 0 24px 32px;
+                padding: 40px 32px;
             }
-
-            .specs-grid {
+            
+            .cta-button {
+                width: calc(100% - 48px);
+                margin: 0 24px 40px;
+                max-width: 400px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 20px;
             }
+        }
 
-            .cta-button {
-                width: calc(100% - 80px);
-                margin: 30px 40px 50px;
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🍅Cherry Tomato</h1>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="float-item">🍅</div>
+        <div class="float-item">🍒</div>
+        <div class="float-item">🌿</div>
+        <div class="float-item">🍅</div>
     </div>
 
+    <!-- Watermark -->
     <div class="watermark">
-        <img src="christ_logo1.jpg" alt="Watermark Logo">
-        <span class="watermark-text">By Sai Darshan</span>
+        <img src="christ_logo1.jpg" alt="Christ Logo">
+        <span class="watermark-text">Premium Organic</span>
     </div>
 
-    <div class="slider-container">
-        <div class="badge">Organic</div>
-        <div class="slider" id="slider">
-            <div class="slide">
-                <img src="cherry_to1.webp" alt="Cherry Tomato Image 1" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="slide">
-                <img src="cherry_to2.png" alt="Cherry Tomato Image 2" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="slide">
-                <img src="cherry_to3.jpg" alt="Cherry Tomato Image 3" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>🍅 Premium Cherry Tomato</h1>
+            <p class="header-tagline">Greenhouse Grown • Year-Round Freshness • Nature's Candy</p>
         </div>
-        <div class="slider-dots">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
-        </div>
-    </div>
+    </header>
 
+    <!-- Hero Slider -->
+    <section class="hero-section fade-in">
+        <div class="slider-container">
+            <div class="premium-badge">🌟 Premium Organic</div>
+            <div class="slider" id="slider">
+                <div class="slide">
+                    <img src="cherry_to1.webp" alt="Fresh Cherry Tomatoes Cluster">
+                    <div class="slide-overlay">
+                        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Fresh Harvest</h3>
+                        <p style="opacity: 0.9;">Picked at peak ripeness</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="cherry_to2.png" alt="Cherry Tomatoes in Greenhouse">
+                    <div class="slide-overlay">
+                        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Greenhouse Grown</h3>
+                        <p style="opacity: 0.9;">Perfect conditions year-round</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="cherry_to3.jpg" alt="Cherry Tomatoes Closeup">
+                    <div class="slide-overlay">
+                        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Perfect Sweetness</h3>
+                        <p style="opacity: 0.9;">Nature's bite-sized candy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Info Card -->
     <div class="container">
-        <div class="product-info">
-            <h2 class="product-title">Cherry Tomato</h2>
-            <p class="product-subtitle">Nature's candy in bite-sized perfection. These vibrant red gems are grown in our state-of-the-art greenhouse, ensuring optimal sweetness and nutrition year-round. Bursting with flavor and packed with antioxidants, they're perfect for snacking, salads, or adding a pop of color to any dish.</p>
+        <article class="product-card fade-in">
+            <h2 class="product-title">Sweet Cherry Tomato</h2>
+            <p class="product-subtitle">Experience the perfect balance of sweetness and juiciness in every bite. Grown in our state-of-the-art greenhouse with precision climate control, these cherry tomatoes deliver unmatched flavor and nutrition throughout the year. Perfect for snacking, salads, or gourmet dishes.</p>
 
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <div class="spec-icon">📏</div>
-                    <div class="spec-label">Size</div>
-                    <div class="spec-value">2-3 cm</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">📏</span>
+                    <div class="stat-label">Size</div>
+                    <div class="stat-value">2-3 cm</div>
                 </div>
-                <div class="spec-card">
-                    <div class="spec-icon">⚖️</div>
-                    <div class="spec-label">Weight</div>
-                    <div class="spec-value">15-30g</div>
+                <div class="stat-card">
+                    <span class="stat-icon">⚖️</span>
+                    <div class="stat-label">Weight</div>
+                    <div class="stat-value">15-30g</div>
                 </div>
-                <div class="spec-card">
-                    <div class="spec-icon">🌡️</div>
-                    <div class="spec-label">Growing Temp</div>
-                    <div class="spec-value">18-25°C</div>
+                <div class="stat-card">
+                    <span class="stat-icon">🌡️</span>
+                    <div class="stat-label">Temp Range</div>
+                    <div class="stat-value">18-25°C</div>
                 </div>
-                <div class="spec-card">
-                    <div class="spec-icon">⏱️</div>
-                    <div class="spec-label">Harvest Time</div>
-                    <div class="spec-value">60-80 Days</div>
+                <div class="stat-card">
+                    <span class="stat-icon">⏱️</span>
+                    <div class="stat-label">Harvest</div>
+                    <div class="stat-value">60-80 Days</div>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <div class="section">
-            <h3 class="section-title">Characteristics</h3>
+        <!-- Characteristics -->
+        <section class="content-section fade-in">
+            <h3 class="section-title">🍒 Key Characteristics</h3>
             <ul class="features-list">
                 <li>
-                    <div class="feature-icon">✓</div>
-                    <span>Small, round shape with vibrant red color when ripe</span>
+                    <div class="feature-icon">✨</div>
+                    <span class="feature-text">Perfectly round with vibrant ruby-red color when ripe</span>
                 </li>
                 <li>
-                    <div class="feature-icon">✓</div>
-                    <span>Sweet flavor with higher sugar content than regular tomatoes</span>
+                    <div class="feature-icon">🍬</div>
+                    <span class="feature-text">Exceptional sweetness (higher Brix than regular tomatoes)</span>
                 </li>
                 <li>
-                    <div class="feature-icon">✓</div>
-                    <span>Thin skin and juicy texture ideal for fresh consumption</span>
+                    <div class="feature-icon">💧</div>
+                    <span class="feature-text">Thin skin with juicy, burst-in-your-mouth texture</span>
                 </li>
                 <li>
-                    <div class="feature-icon">✓</div>
-                    <span>Grown in clusters on vine, typically 10-20 tomatoes per cluster</span>
+                    <div class="feature-icon">🌿</div>
+                    <span class="feature-text">Grown in controlled environment for consistent quality</span>
                 </li>
                 <li>
-                    <div class="feature-icon">✓</div>
-                    <span>Thrives in controlled greenhouse with optimal light and humidity</span>
+                    <div class="feature-icon">🎯</div>
+                    <span class="feature-text">Clusters of 10-20 tomatoes per vine for easy harvesting</span>
                 </li>
             </ul>
-        </div>
+        </section>
 
-        <div class="section">
-            <h3 class="section-title">Nutritional Information</h3>
-            <p style="color: #666; margin-bottom: 15px;">Per 100g serving</p>
-            <div class="nutritional-info">
-                <div class="nutrient">
+        <!-- Nutrition -->
+        <section class="content-section fade-in">
+            <h3 class="section-title">🥗 Nutrition Facts</h3>
+            <p style="color: #64748b; margin-bottom: 24px; font-size: 15px;">Per 100g serving • Fresh & Organic</p>
+            <div class="nutrition-grid">
+                <div class="nutrient-card">
                     <div class="nutrient-value">27</div>
                     <div class="nutrient-label">Calories</div>
                 </div>
-                <div class="nutrient">
+                <div class="nutrient-card">
                     <div class="nutrient-value">1.3g</div>
                     <div class="nutrient-label">Protein</div>
                 </div>
-                <div class="nutrient">
+                <div class="nutrient-card">
                     <div class="nutrient-value">5.8g</div>
                     <div class="nutrient-label">Carbs</div>
                 </div>
-                <div class="nutrient">
+                <div class="nutrient-card">
                     <div class="nutrient-value">20mg</div>
                     <div class="nutrient-label">Vitamin C</div>
                 </div>
-                <div class="nutrient">
+                <div class="nutrient-card">
                     <div class="nutrient-value">290mg</div>
                     <div class="nutrient-label">Potassium</div>
                 </div>
-                <div class="nutrient">
+                <div class="nutrient-card">
                     <div class="nutrient-value">3.0mg</div>
                     <div class="nutrient-label">Lycopene</div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h3 class="section-title">Health Benefits</h3>
+        <!-- Health Benefits -->
+        <section class="content-section fade-in">
+            <h3 class="section-title">❤️ Health Benefits</h3>
             <ul class="features-list">
                 <li>
-                    <div class="feature-icon">❤️</div>
-                    <span>Rich in lycopene antioxidant that supports heart health</span>
+                    <div class="feature-icon">🫀</div>
+                    <span class="feature-text">Lycopene protects heart health & reduces inflammation</span>
                 </li>
                 <li>
-                    <div class="feature-icon">💪</div>
-                    <span>High vitamin C content boosts immune system</span>
+                    <div class="feature-icon">🛡️</div>
+                    <span class="feature-text">High Vitamin C boosts immunity & collagen production</span>
                 </li>
                 <li>
                     <div class="feature-icon">👁️</div>
-                    <span>Contains beta-carotene beneficial for eye health</span>
+                    <span class="feature-text">Beta-carotene supports eye health & vision</span>
                 </li>
                 <li>
                     <div class="feature-icon">🦴</div>
-                    <span>Good source of vitamin K and potassium for bone health</span>
+                    <span class="feature-text">Vitamin K & potassium strengthen bones</span>
                 </li>
             </ul>
-        </div>
+        </section>
 
-        <div class="section growing-tips">
-            <h3 class="section-title">Growing Conditions</h3>
+        <!-- Growing Conditions -->
+        <section class="content-section fade-in">
+            <h3 class="section-title">🌱 Optimal Growing</h3>
             <ul class="features-list">
                 <li>
                     <div class="feature-icon">☀️</div>
-                    <span>Requires 6-8 hours of sunlight or grow lights daily</span>
+                    <span class="feature-text">6-8 hours sunlight or full-spectrum LED lighting</span>
                 </li>
                 <li>
                     <div class="feature-icon">💧</div>
-                    <span>Needs consistent watering, soil should be moist but not soggy</span>
+                    <span class="feature-text">Consistent moisture (never waterlogged)</span>
                 </li>
                 <li>
                     <div class="feature-icon">🌡️</div>
-                    <span>Optimal temperature range: 18-25°C during day, 13-16°C at night</span>
+                    <span class="feature-text">Day: 18-25°C | Night: 13-16°C</span>
                 </li>
                 <li>
-                    <div class="feature-icon">🌱</div>
-                    <span>pH level: 6.0-6.8 for optimal nutrient absorption</span>
-                </li>
-                <li>
-                    <div class="feature-icon">🌿</div>
-                    <span>Regular pruning and support structures help maximize yield</span>
+                    <div class="feature-icon">🧪</div>
+                    <span class="feature-text">pH 6.0-6.8 for maximum nutrient uptake</span>
                 </li>
             </ul>
-        </div>
+        </section>
 
+        <!-- CTA Button -->
         <button class="cta-button" onclick="showComingSoon()">
-            📊 Get Real Time Data
+            🚀 Monitor Real-Time Data
         </button>
 
-        <div class="footer">
-            <p>By</p>
-            <p class="author">SAI DARSHAN</p>
-            <p class="tagline">Enhancing Innovation to Transform Agriculture</p>
-        </div>
+        <!-- Footer -->
+        <footer class="footer fade-in">
+            <div style="font-size: 14px; color: #94a3b8; margin-bottom: 12px;">Proudly Grown with ❤️</div>
+            <div class="footer-author">SAI DARSHAN</div>
+            <div class="footer-tagline">Transforming Agriculture Through Innovation & Precision</div>
+        </footer>
     </div>
 
     <script>
@@ -570,16 +885,139 @@
             });
         }
 
-        function autoSlide() {
+        function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             goToSlide(currentSlide);
         }
 
-        setInterval(autoSlide, 4000);
+        // Auto-slide with pause on interaction
+        let autoSlideInterval = setInterval(nextSlide, 5000);
+        let isInteracting = false;
+
+        document.querySelector('.slider-container').addEventListener('touchstart', () => {
+            isInteracting = true;
+            clearInterval(autoSlideInterval);
+        });
+
+        document.querySelector('.slider-container').addEventListener('touchend', () => {
+            setTimeout(() => {
+                isInteracting = false;
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }, 10000);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                isInteracting = true;
+                clearInterval(autoSlideInterval);
+            });
+        });
 
         function showComingSoon() {
-            alert('🚀 This feature will be available soon!\n\nReal-time data monitoring including:\n• Temperature & Humidity\n• Growth Progress\n• Nutrient Levels\n• Harvest Predictions');
+            // Enhanced modal-like experience
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                backdrop-filter: blur(20px);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 24px;
+                    padding: 40px 24px;
+                    text-align: center;
+                    max-width: 320px;
+                    width: 100%;
+                    box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+                    animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                ">
+                    <div style="font-size: 48px; margin-bottom: 20px;">🚀</div>
+                    <h3 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 16px;">Coming Soon!</h3>
+                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 24px;">
+                        Real-time monitoring dashboard with:<br>
+                        • 📊 Temperature & Humidity<br>
+                        • 🌱 Growth Progress<br>
+                        • 🧪 Nutrient Levels<br>
+                        • 🎯 Harvest Predictions
+                    </p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+                        color: white;
+                        border: none;
+                        padding: 14px 32px;
+                        border-radius: 50px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        width: 100%;
+                    ">Got it! 🎉</button>
+                </div>
+            `;
+            
+            modal.querySelector('button').addEventListener('click', () => {
+                modal.remove();
+            });
+            
+            document.body.appendChild(modal);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (modal.parentNode) modal.remove();
+            }, 5000);
         }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            observer.observe(el);
+        });
+
+        // Preload images for smooth slider
+        const images = ['cherry_to1.webp', 'cherry_to2.png', 'cherry_to3.jpg'];
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
     </script>
+
+    <style>
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
 </body>
 </html>
