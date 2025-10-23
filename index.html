@@ -54,6 +54,7 @@
             position: absolute;
             opacity: 0.08;
             animation: float 20s infinite linear;
+            font-size: 2rem;
         }
 
         .float-item:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
@@ -548,12 +549,12 @@
             line-height: 1.5;
         }
 
-        /* Watermark */
+        /* Watermark - STRAIGHT (no rotation) */
         .watermark {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
+            transform: translate(-50%, -50%);
             z-index: 1;
             opacity: 0.06;
             pointer-events: none;
@@ -673,7 +674,7 @@
         <div class="float-item">🍅</div>
     </div>
 
-    <!-- Watermark -->
+    <!-- Watermark - STRAIGHT -->
     <div class="watermark">
         <img src="christ_logo1.jpg" alt="Christ Logo">
         <span class="watermark-text">Premium Organic</span>
@@ -890,31 +891,17 @@
             goToSlide(currentSlide);
         }
 
-        // Auto-slide with pause on interaction
-        let autoSlideInterval = setInterval(nextSlide, 5000);
-        let isInteracting = false;
+        // ✅ FIXED: Simple 5-second auto-slide (no interaction pause)
+        setInterval(nextSlide, 5000);
 
-        document.querySelector('.slider-container').addEventListener('touchstart', () => {
-            isInteracting = true;
-            clearInterval(autoSlideInterval);
-        });
-
-        document.querySelector('.slider-container').addEventListener('touchend', () => {
-            setTimeout(() => {
-                isInteracting = false;
-                autoSlideInterval = setInterval(nextSlide, 5000);
-            }, 10000);
-        });
-
-        dots.forEach(dot => {
+        // Manual dot clicks still work
+        dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                isInteracting = true;
-                clearInterval(autoSlideInterval);
+                goToSlide(index);
             });
         });
 
         function showComingSoon() {
-            // Enhanced modal-like experience
             const modal = document.createElement('div');
             modal.style.cssText = `
                 position: fixed;
@@ -965,13 +952,8 @@
                 </div>
             `;
             
-            modal.querySelector('button').addEventListener('click', () => {
-                modal.remove();
-            });
-            
             document.body.appendChild(modal);
             
-            // Auto remove after 5 seconds
             setTimeout(() => {
                 if (modal.parentNode) modal.remove();
             }, 5000);
@@ -999,7 +981,7 @@
             observer.observe(el);
         });
 
-        // Preload images for smooth slider
+        // Preload images
         const images = ['cherry_to1.webp', 'cherry_to2.png', 'cherry_to3.jpg'];
         images.forEach(src => {
             const img = new Image();
